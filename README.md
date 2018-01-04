@@ -1,10 +1,14 @@
 # README #
 
+## Note ##
+
+This repo has been migrated from Bitbucket to Github. As a result, please be aware that some links in this readme may not work - for examples references to a Wiki.  
+
 ## About ##
 
 The [Whereabouts](http://whereaboutslondon.org) web-application allows one to explore clustered regional data about the Greater London Area. This work is a collaborative research and development project between the [Future Cities Catapult](https://futurecities.catapult.org.uk/) and the [Greater London Authority](https://www.london.gov.uk). The London Datastore is a hub for data related activities for the city. With the latest version, users can find, explore and build on over 500 datasets that the city generates, by either downloading datasets, or access through an API . We've used the Datastore's new spatial search functionality to help us extract data for neighbourhoods across the city, and merged that with open data from other sources, including the Food Standards Agency, the Office for National Statistics, Land Registry, OpenStreetMap, Flickr and Transport for London. By bringing information from these different sources together, we can build up a picture of what makes our local areas similar to, and distinct from, each other. We used an algorithm called K-Means clustering to help us find neighbourhoods that have similar characteristics. We grouped them together to form the Whereabouts you can explore on the map.
 
-![example_plot2.png](https://bitbucket.org/repo/KzXaya/images/902990708-example_plot2.png)
+![example_plot2.png](R/example_plot2.png)
 
 # Tutorial #
 
@@ -40,7 +44,7 @@ This repository contains the code, assets and methodology used to construct the 
 
 ## Contacts ##
 
-* Future Cities Catapult (https://bitbucket.org/fcclab)
+* Future Cities Catapult (https://github.com/FutureCitiesCatapult)
 
 # Usage #
 
