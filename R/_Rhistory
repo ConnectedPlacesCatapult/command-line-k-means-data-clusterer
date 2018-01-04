@@ -1,0 +1,443 @@
+library(rgeos)
+library(maptools)
+library(gpclib)  # may be needed, may not be
+# MAP
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# VERIFY IT LOADED PROPERLY
+plot(np_dist)
+install.packages(c("plyr", "ggplot2","rgeos", "maptools")))
+install.packages(c("plyr", "ggplot2","rgeos", "maptools"))
+library(rgeos)
+library(maptools)
+library(gpclib)  # may be needed, may not be
+# MAP
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# VERIFY IT LOADED PROPERLY
+plot(np_dist)
+# Associate the clusters with the LSOAs
+data <- read.csv("clusters.csv")
+names(data)
+library(ggplot2)
+View(data)
+#INSTALL THE FOLLOWING:
+#install.packages(c("plyr", "ggplot2","rgeos", "maptools")))
+library(rgeos)
+library(maptools)
+library(gpclib)  # may be needed, may not be
+library(plyr)
+library(ggplot2)
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Graph
+np_dist <- fortify(np_dist, region = "NAME_3")
+np_dist$id <- toupper(np_dist$id)  #change ids to uppercase
+ggplot() + geom_map(data = clusterdata, aes(map_id = District, fill = PASS.PERCENT),
+map = np_dist) + expand_limits(x = np_dist$long, y = np_dist$lat)
+np_dist <- fortify(np_dist, region = "clusterdata$Geography.Code")
+np_dist <- fortify(np_dist, region = "Geography Code")
+names(np_dist)
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+np_dist$id <- toupper(np_dist$id)  #change ids to uppercase
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = PASS.PERCENT),
+map = np_dist) + expand_limits(x = np_dist$long, y = np_dist$lat)
+#INSTALL THE FOLLOWING:
+#install.packages(c("plyr", "ggplot2","rgeos", "maptools")))
+library(rgeos)
+library(maptools)
+library(gpclib)  # may be needed, may not be
+library(plyr)
+library(ggplot2)
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Graph
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+np_dist$id <- toupper(np_dist$id)  #change ids to uppercase
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+map = np_dist) + expand_limits(x = np_dist$long, y = np_dist$lat)
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + expand_limits(x = np_dist$long, y = np_dist$lat)
+require(RColorBrewer)
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Reds" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+pdf("map.pdf")
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Write to Disk
+dev.off()
+# Redirect Output to Write to Disk
+png("map.png")
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+# Redirect Output to Write to Disk
+svg("clustermap.svg")
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+# R Script to map the
+# Author: Rudi Ball
+#INSTALL THE FOLLOWING:
+#install.packages(c("plyr", "ggplot2","rgeos", "maptools")))
+library(rgeos)
+library(maptools)
+library(gpclib)  # may be needed, may not be
+library(plyr)
+library(ggplot2)
+require(RColorBrewer)
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Graph Clusters using GGPlot
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+# Change ids to uppercase
+np_dist$id <- toupper(np_dist$id)
+# Redirect Output to Write to Disk
+svg("clustermap.svg", width=2400, height=1596)
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+print 'Starting'
+printf("Finished.")
+798 * 2
+scale = 2
+scale
+scale = 2
+# Redirect Output to Write to Disk
+pdf("clustermap.pdf", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+# GLA Whereabouts map preview generation tool.
+# Author: Rudi Ball
+#INSTALL THE FOLLOWING:
+#install.packages(c("plyr", "ggplot2","rgeos", "maptools")))
+library(rgeos)
+library(maptools)
+library(gpclib)  # may be needed, may not be
+library(plyr)
+library(ggplot2)
+require(RColorBrewer)
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+#plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Graph Clusters using GGPlot
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+# Change ids to uppercase
+np_dist$id <- toupper(np_dist$id)
+scale = 2
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+scale = 5
+ls
+scale
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
++ theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+# Close output
+dev.off()
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", background = "white", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+# Redirect Output to Write to Disk
+clustermap <- ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", background = "white", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Set Colours
+clustermap <- clustermap + opts(
+panel.background = theme_rect(fill = "transparent",colour = NA),
+panel.grid.minor = theme_blank(),
+panel.grid.major = theme_blank(),
+plot.background = theme_rect(fill = "transparent",colour = NA)
+# Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+print(clustermap)
+# Close output
+dev.off()
+clustermap <- ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", background = "white", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Set Colours
+clustermap <- clustermap + opts(
+panel.background = theme_rect(fill = "transparent",colour = NA),
+panel.grid.minor = theme_blank(),
+panel.grid.major = theme_blank(),
+plot.background = theme_rect(fill = "transparent",colour = NA)
+# Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+print(clustermap)
+# Close output
+dev.off()
+clustermap <- ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Set Colours
+clustermap <- clustermap + opts(
+panel.background = theme_rect(fill = "transparent",colour = NA),
+panel.grid.minor = theme_blank(),
+panel.grid.major = theme_blank(),
+plot.background = theme_rect(fill = "transparent",colour = NA)
+# Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+print(clustermap)
+# Close output
+dev.off()
+# Generate Map
+clustermap <- ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Set Colours
+clustermap <- clustermap + opts(
+panel.background = theme_rect(fill = "transparent",colour = NA),
+panel.grid.minor = theme_blank(),
+panel.grid.major = theme_blank(),
+plot.background = theme_rect(fill = "transparent",colour = NA)
+# Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale), bg = "transparent")
+print(clustermap)
+# Close output
+dev.off()
+png("clustermap.png", width=(1200*scale), height=(798*scale), bg = "transparent")
+print(clustermap)
+# Close output
+dev.off()
+clustermap
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+clustermap <- ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+scale = 8
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+#plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Graph Clusters using GGPlot
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+# Change ids to uppercase
+np_dist$id <- toupper(np_dist$id)
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+clustermap <- ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+scale
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster, size=10),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster, size=(scale*0.8)),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( 9 , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+#scale set
+scale = 8
+linewidth = 8
+numclusters = 8
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+#plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Graph Clusters using GGPlot
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+# Change ids to uppercase
+np_dist$id <- toupper(np_dist$id)
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster, size=linewidth),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( numclusters , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+#scale set
+scale = 8
+linewidth = 8
+numclusters = 8
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+#plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Graph Clusters using GGPlot
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+# Change ids to uppercase
+np_dist$id <- toupper(np_dist$id)
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster, size=linewidth),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( numclusters , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+#scale set
+scale = 8
+linewidth = 0
+numclusters = 8
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+#plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Graph Clusters using GGPlot
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+# Change ids to uppercase
+np_dist$id <- toupper(np_dist$id)
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster, size=linewidth),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( numclusters , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+scale = 8
+borderwidth = 0.1
+numclusters = 8
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+#plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Graph Clusters using GGPlot
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+# Change ids to uppercase
+np_dist$id <- toupper(np_dist$id)
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster, size=borderwidth),
+colour = "black", map = np_dist) + scale_fill_gradientn(colours = brewer.pal( numclusters , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+#scale set
+scale = 8
+borderwidth = 1
+numclusters = 8
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+#plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Graph Clusters using GGPlot
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+# Change ids to uppercase
+np_dist$id <- toupper(np_dist$id)
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", size=borderwidth, map = np_dist) + scale_fill_gradientn(colours = brewer.pal( numclusters , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+#scale set
+scale = 8
+borderwidth = 0
+numclusters = 8
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+#plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Graph Clusters using GGPlot
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+# Change ids to uppercase
+np_dist$id <- toupper(np_dist$id)
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", size=borderwidth, map = np_dist) + scale_fill_gradientn(colours = brewer.pal( numclusters , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+count(clusterdata$Cluster)
+size(clusterdata$Cluster)
+number(clusterdata$Cluster)
+hist(clusterdata$Cluster)
+max(clusterdata$Cluster)
+scale = 8
+borderwidth = 0
+numclusters = max(clusterdata$Cluster) + 1
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+#plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Do Summary
+summary(clusterdata$Cluster)
+# Graph Clusters using GGPlot
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+# Change ids to uppercase
+np_dist$id <- toupper(np_dist$id)
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", size=borderwidth, map = np_dist) + scale_fill_gradientn(colours = brewer.pal( numclusters , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
+#scale set
+scale = 8
+borderwidth = 0
+numclusters = max(clusterdata$Cluster) + 1
+# Get the polygon data from the shape file
+np_dist <- readShapeSpatial('LSOA_2011_EW_BFE_justLondon.shp')
+# Plot the shape file
+#plot(np_dist)
+# Associate the clusters with the LSOAs
+clusterdata <- read.csv("clusters.csv")
+# Do Summary
+summary(clusterdata$Cluster)
+# Graph Clusters using GGPlot
+np_dist <- fortify(np_dist, region = "LSOA11CD")
+# Change ids to uppercase
+np_dist$id <- toupper(np_dist$id)
+# Redirect Output to Write to Disk
+png("clustermap.png", width=(1200*scale), height=(798*scale))
+ggplot() + geom_map(data = clusterdata, aes(map_id = Geography.Code, fill = Cluster),
+colour = "black", size=borderwidth, map = np_dist) + scale_fill_gradientn(colours = brewer.pal( numclusters , "Blues" )) + expand_limits(x = np_dist$long, y = np_dist$lat)
+# Close output
+dev.off()
